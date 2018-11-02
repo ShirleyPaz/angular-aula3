@@ -12,6 +12,7 @@ import { CepDetailsComponent } from './cep-details/cep-details.component';
 import { CepExibicaoComponent } from './cep-exibicao/cep-exibicao.component';
 import { CepBuscaComponent } from './cep-busca/cep-busca.component';
 import { FormsModule } from '@angular/forms';
+import { TodoFormComponent } from './todo-form/todo-form.component';
 
 const appRoutes = [{
   path: '', component: HomeComponent,
@@ -22,7 +23,13 @@ const appRoutes = [{
   path: 'cep', component: CepBuscaComponent,
 },
 {
+  path: 'todos/add', component: TodoFormComponent,
+},
+{
   path: 'cep/:cep', component: CepDetailsComponent,
+},
+{
+  path: '**', redirectTo: ''
 }];
 
 @NgModule({
@@ -34,7 +41,8 @@ const appRoutes = [{
     HomeComponent,
     CepDetailsComponent,
     CepExibicaoComponent,
-    CepBuscaComponent
+    CepBuscaComponent,
+    TodoFormComponent
   ],
   imports: [
     BrowserModule,
