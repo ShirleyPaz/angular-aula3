@@ -14,24 +14,12 @@ import { CepBuscaComponent } from './cep-busca/cep-busca.component';
 import { FormsModule } from '@angular/forms';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { BoolPipe } from './bool.pipe';
+import { CounterStateComponent } from './counter-state/counter-state.component';
 
-const appRoutes = [{
-  path: '', component: HomeComponent,
-}, {
-  path: 'todos', component: TodoListComponent,
-},
-{
-  path: 'cep', component: CepBuscaComponent,
-},
-{
-  path: 'todos/add', component: TodoFormComponent,
-},
-{
-  path: 'cep/:cep', component: CepDetailsComponent,
-},
-{
-  path: '**', redirectTo: ''
-}];
+//reducers
+import { counterReducer } from './store/reducers/counter'
+//importar ngrx para usar a store
+import { StoreModule } from '@ngrx/store'
 
 @NgModule({
   declarations: [
@@ -44,13 +32,14 @@ const appRoutes = [{
     CepExibicaoComponent,
     CepBuscaComponent,
     TodoFormComponent,
-    BoolPipe
+    BoolPipe,
+    CounterStateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     FormsModule,
+    StoreModule.forRoot( { counter: counterReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
