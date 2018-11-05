@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../todo.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-todo-form',
@@ -15,9 +17,25 @@ export class TodoFormComponent implements OnInit {
     date: '',
   };
 
-  constructor() { }
+  constructor(
+    private todoService: TodoService,
+    private router: Router
+    ) {
+
+  }
 
   ngOnInit() {
   }
 
+  onFormSend() {
+    this.todoService.addTodo
+    (this.todo)
+    .subscribe( valor => {
+      console.log(valor)
+      alert('To-do adicionado com sucesso');
+      this.router.navigateByUrl('/todos');
+    }, error => {
+      alert('Erro ao adicionar')
+    });
+  }
 }

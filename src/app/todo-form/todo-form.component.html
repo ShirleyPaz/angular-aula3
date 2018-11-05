@@ -1,18 +1,47 @@
 <div>
+  {{ todo | json }}
   <form #form="ngForm">
     <div>
       <label>Título</label><br>
-      <input  
-        id='title' 
-        name='title' 
-        type='text' 
-        [(ngModel)]='todo.title' 
-        #title="ngModel" 
-        required>
-      <div *ngIf = 'title?.errors?.required'>
-        O campo título é obrigatório.
+      <input id='title' name='title' type='text' [(ngModel)]='todo.title' #title="ngModel" minlength="5" required>
+      <div *ngIf='title?.touched'>
+        <div *ngIf='title?.errors?.required'>
+          O campo título é obrigatório.
+        </div>
+        <div *ngIf='title?.errors?.minlength'>
+          O campo título tem que ter 5 caracteres.
+        </div>
       </div>
     </div>
-    <button type='submit'>Enviar</button>
+
+    <div>
+      <label>Descrição</label><br>
+      <input id='description' name='description' type='text' [(ngModel)]='todo.description' #description="ngModel" minlength="5" required>
+      <div *ngIf='description?.touched'>
+        <div *ngIf='description?.errors?.required'>
+          O campo descrição é obrigatório.
+        </div>
+        <div *ngIf='description?.errors?.minlength'>
+          O campo descrição tem que ter 5 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label>Data</label><br>
+      <input id='date' name='date' type='text' [(ngModel)]='todo.date' #date="ngModel" minlength="5" required>
+      <div *ngIf='date?.touched'>
+        <div *ngIf='date?.errors?.required'>
+          O campo título é obrigatório.
+        </div>
+        <div *ngIf='date?.errors?.minlength'>
+          O campo título tem que ter 5 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <input id='finished' name='finished' type='checkbox' [(ngModel)]='todo.finished'><br>
+
+    <button type='submit' [disabled]="form.invalid" (click)='onFormSend()'>Enviar</button>
   </form>
 </div>

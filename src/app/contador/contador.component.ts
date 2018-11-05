@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CounterService } from '../counter.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contador',
@@ -8,22 +8,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contador.component.css']
 })
 export class ContadorComponent implements OnInit {
-  valorAtual = 0;
+  valor$: Observable<number>;
   contadorSubscription: Subscription = null;
 
   constructor(
     public counterService: CounterService
   ) {
-    this.contadorSubscription = counterService.valorDoContador
-      .subscribe((value) => {
-        this.valorAtual = value;
-        console.log(value + ' component');
-      });
+        this.valor$ = counterService
+        .valorDoContador;
   }
 
-  onUnsubscribeClick() {
-    this.contadorSubscription.unsubscribe();
-  }
+  // onUnsubscribeClick() {
+  //   this.contadorSubscription.unsubscribe();
+  // }
 
   ngOnInit() {
   }
